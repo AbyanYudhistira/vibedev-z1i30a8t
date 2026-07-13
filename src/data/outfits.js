@@ -29,8 +29,6 @@ export const OUTFIT_BANDS = [
         description: "Down parka, ski gloves, balaclava, and waterproof boots.",
       },
     ],
-    funEmojis: ["🧥", "🧣", "❄️", "🥾", "🧤", "⛄"],
-    weatherEmoji: "❄️",
   },
   {
     id: "cold",
@@ -62,8 +60,6 @@ export const OUTFIT_BANDS = [
         description: "Bomber jacket, turtleneck, cargo pants, and high-top sneakers.",
       },
     ],
-    funEmojis: ["🧥", "🧶", "🧣", "🥾", "🌬️", "☁️"],
-    weatherEmoji: "🌨️",
   },
   {
     id: "cool",
@@ -95,8 +91,6 @@ export const OUTFIT_BANDS = [
         description: "Blazer, oxford shirt, slim trousers, and suede desert boots.",
       },
     ],
-    funEmojis: ["🧥", "🧢", "👔", "🍂", "🌤️", "👖"],
-    weatherEmoji: "🍂",
   },
   {
     id: "mild",
@@ -128,8 +122,6 @@ export const OUTFIT_BANDS = [
         description: "Oversized shirt, relaxed trousers, and colorful trainers.",
       },
     ],
-    funEmojis: ["👕", "🧥", "🌿", "🌤️", "👟", "☁️"],
-    weatherEmoji: "🌤️",
   },
   {
     id: "warm",
@@ -161,8 +153,6 @@ export const OUTFIT_BANDS = [
         description: "Polo shirt, cropped trousers, and woven espadrilles.",
       },
     ],
-    funEmojis: ["👚", "🩳", "🌿", "☀️", "🧢", "👡"],
-    weatherEmoji: "☀️",
   },
   {
     id: "hot",
@@ -194,8 +184,6 @@ export const OUTFIT_BANDS = [
         description: "Moisture-wick shirt, running shorts, visor, and trainers.",
       },
     ],
-    funEmojis: ["🕶️", "🏖️", "🎾", "☀️", "🩳", "🧴"],
-    weatherEmoji: "🔆",
   },
   {
     id: "scorching",
@@ -227,24 +215,28 @@ export const OUTFIT_BANDS = [
         description: "Hawaiian shirt, linen shorts, straw hat, and barefoot sandals.",
       },
     ],
-    funEmojis: ["🧢", "🩱", "🌴", "🔥", "☀️", "🥵"],
-    weatherEmoji: "🥵",
   },
 ];
 
-export function getTemperatureEmojis(band, variantIndex = 0) {
-  const variantEmojis = band.variants.map((item) => item.emoji);
-  const currentEmoji = band.variants[variantIndex]?.emoji ?? variantEmojis[0];
-  const ordered = [currentEmoji, band.weatherEmoji, ...variantEmojis, ...band.funEmojis];
+export function getUniqueEmojis(variants) {
   const seen = new Set();
-
-  return ordered.filter((emoji) => {
+  return variants.map((item) => item.emoji).filter((emoji) => {
     if (seen.has(emoji)) {
       return false;
     }
     seen.add(emoji);
     return true;
   });
+}
+
+export function getBandRangeLabel(band) {
+  if (band.min <= -50) {
+    return "Below 0°C";
+  }
+  if (band.max >= 100) {
+    return `${band.min}°C+`;
+  }
+  return `${band.min}–${band.max - 1}°C`;
 }
 
 export function toCelsius(value, unit) {

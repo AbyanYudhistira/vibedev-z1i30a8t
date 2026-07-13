@@ -13,6 +13,8 @@ A single-page React widget that suggests what to wear based on the temperature y
 
 ## Temperature bands
 
+Ranges use half-open intervals in code (`min` inclusive, `max` exclusive).
+
 | Band | Range (°C) | Vibe |
 |------|------------|------|
 | Arctic | below 0 | icy blue |

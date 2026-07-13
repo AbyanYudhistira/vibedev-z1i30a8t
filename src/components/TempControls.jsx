@@ -48,7 +48,7 @@ export default function TempControls({
       </div>
 
       <p id="temp-hint" className="temp-hint">
-        Type a number and watch your look update instantly.
+        Type a number and watch your outfit matching with the weather.
       </p>
     </div>
   );

@@ -57,9 +57,12 @@ export default function App() {
     applyTheme(band?.theme ?? DEFAULT_THEME);
   }, [band]);
 
+  useEffect(() => {
+    setVariantIndex(0);
+  }, [band?.id]);
+
   function handleTempChange(value) {
     setTemp(value);
-    setVariantIndex(0);
   }
 
   function handleUnitToggle(nextUnit) {
@@ -112,7 +115,6 @@ export default function App() {
         <OutfitCard
           band={band}
           variant={variant}
-          variantIndex={safeVariantIndex}
           displayTemp={displayTemp}
           variantKey={variantKey}
           onRandomize={handleRandomize}
